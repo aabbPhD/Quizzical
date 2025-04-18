@@ -1,0 +1,215 @@
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/Inter/Inter-VariableFont_opsz,wght.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/Inter/Inter-Italic-VariableFont_opsz,wght.ttf');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Karla';
+  src: url('./assets/fonts/Karla/Karla-VariableFont_wght.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+$main-color: rgb(41, 50, 100);
+$main-theme: rgb(245, 247, 251);
+$button-color: rgb(77, 91, 158);
+$selected-answer-color: rgb(214, 219, 245);
+$correct-answer-color: rgb(113, 218, 124);
+$incorrect-answer-color: rgb(235, 100, 100);
+
+@mixin vertical-align-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  font-family: 'Inter';
+  background-color: $main-theme;
+  color: $main-color;
+}
+
+.game-intro {
+  @include vertical-align-img;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 600px;
+  font-size: 16px;
+
+  img {
+    position: absolute;
+    width: 100px;
+    top: 10px;
+    right: 30px;
+  }
+
+  h1 {
+    margin-bottom: 12px;
+    font-family: 'Karla';
+    font-size: 32px;
+  }
+
+  p {
+    margin-bottom: 32px;
+  }
+
+  .select-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 18px;
+    padding: 0 16px 0 16px;
+    font-family: 'Karla';
+
+    label {
+      width: 250px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    select {
+      width: 100%;
+      height: 100%;
+      padding: 0 16px;
+      border: 0;
+      border-radius: 2px;
+      box-shadow: 0 0 0.6em 0 rgba(0, 0, 0, 0.2);
+      font-size: inherit;
+      color: $main-color;
+      cursor: pointer;
+    }
+  }
+}
+
+.quiz-container {
+  min-width: 600px;
+  max-width: 1000px;
+
+  .quiz-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 0 36px 10px 0;
+    border-bottom: 1px gray solid;
+
+    img {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      right: -14px;
+      width: 32px;
+    }
+
+    .question {
+      font-size: 18px;
+      font-weight: bold;
+      line-height: 24px;
+      margin-bottom: 10px;
+    }
+    
+    .answer-options {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      .answer{
+        margin: 0 10px 10px 0;
+        padding: 5px 10px;
+        border: 1px $main-color solid;
+        border-radius: 8px;
+        cursor: pointer;
+
+        &:hover { box-shadow: 0 0 3px 0 darkblue; }
+        &.selected { 
+          background-color: $selected-answer-color; 
+          border-color: $selected-answer-color;
+        }
+        &.correct { 
+          background-color: $correct-answer-color; 
+          border-color: $correct-answer-color;
+        }
+        &.incorrect { 
+          background-color: $incorrect-answer-color; 
+          border-color: $incorrect-answer-color;
+        }
+      }
+    }
+  }
+}
+
+.result {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+
+  p { 
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 24px;
+  }
+}
+
+button {
+  width: 190px;
+  height: 50px;
+  margin-top: 10px;
+  border: 0;
+  border-radius: 15px;
+  background-color: $button-color;
+  color: white;
+  font-size: inherit;
+  cursor: pointer;
+
+  &:hover { background-color: darken($button-color, 10); }
+  &.inactive {
+    background-color: lighten($button-color, 20);
+    cursor: not-allowed;
+  }
+}
+
+.loader-container, .fetch-error {
+  @include vertical-align-img;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 500px;
+  font-size: 16px;
+}
+
+.fetch-error h1 {
+    color: rgb(241, 72, 72); 
+    text-align: center; 
+}
+
